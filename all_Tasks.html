@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Tasks</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .task-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .fade-box {
+            width: 200px;
+            height: 100px;
+            background: #28a745;
+            margin: 10px 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Task 1 -->
+    <div class="task-section">
+        <h2>Task 1: Basic Selectors</h2>
+        <p>First paragraph</p>
+        <p class="test">Paragraph to be hidden</p>
+        <div>Sample div content</div>
+        <ul>
+            <li>First list item</li>
+            <li>Second list item</li>
+        </ul>
+        <button>Button</button>
+    </div>
+
+    <!-- Task 2 -->
+    <div class="task-section">
+        <h2>Task 2: Link Attributes</h2>
+        <a href="https://example.com/page1">Example Link 1</a><br>
+        <a href="https://test.example.com">Example Link 2</a><br>
+        <a href="https://othersite.com" target="_self">External Link</a><br>
+        <img src="https://images.pexels.com/photos/33109/fall-autumn-red-season.jpg?auto=compress&cs=tinysrgb&w=600" title="Original Image 1">
+        <img src="https://images.pexels.com/photos/1563356/pexels-photo-1563356.jpeg?auto=compress&cs=tinysrgb&w=600" title="Original Image 2">
+    </div>
+
+    <!-- Task 3 -->
+    <div class="task-section">
+        <h2>Task 3: Effects</h2>
+        <p id="targetPara">Click buttons to control this paragraph</p>
+        <button onclick="$('#targetPara').hide()">Hide</button>
+        <button onclick="$('#targetPara').show()">Show</button>
+        <button onclick="$('#targetPara').toggle()">Toggle</button>
+
+        <div class="fade-box"></div>
+        <button onclick="$('.fade-box').fadeIn()">Fade In</button>
+        <button onclick="$('.fade-box').fadeOut()">Fade Out</button>
+        <button onclick="$('.fade-box').fadeToggle()">Fade Toggle</button>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Task 1
+            $('p').css('background-color', '#e9ecef');
+            $('.test').hide();
+            $('ul li').css({
+                'background-color': '#ffd700',
+                'padding': '3px'
+            });
+
+            // Task 2
+            $('a[href*="example.com"]').attr('href', 'https://google.com');
+            $('a:not([target])').attr('target', '_blank');
+            $('img').attr('title', 'Updated Image');
+        });
+    </script>
+</body>
+</html>
