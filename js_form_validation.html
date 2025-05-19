@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registration Form</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background: #f4f4f9;
+            }
+
+            .form-container {
+                width: 60%;
+                margin: 2rem auto;
+                padding: 2rem;
+                background: #fff;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                position: relative;
+            }
+
+            .form-container .slider {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+                overflow: hidden;
+            }
+
+            .form-container .slider img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                animation: slide 10s infinite;
+            }
+
+            @keyframes slide {
+                0% { opacity: 1; }
+                33% { opacity: 0; }
+                66% { opacity: 1; }
+            }
+
+            .form-group {
+                margin-bottom: 1rem;
+                display: flex;
+                flex-direction: column;
+                position: relative;
+            }
+
+            .form-group label {
+                font-weight: bold;
+                margin-bottom: 0.5rem;
+            }
+
+            .form-group input, .form-group select, .form-group textarea {
+                padding: 0.5rem;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
+            .form-group input[type="checkbox"] {
+                margin-right: 0.5rem;
+            }
+
+            .form-group .error {
+                color: red;
+                font-size: 0.9rem;
+                position: absolute;
+                top: 100%;
+            }
+
+            .form-group.success input, .form-group.success select, .form-group.success textarea {
+                border-color: green;
+            }
+
+            .form-group.error input, .form-group.error select, .form-group.error textarea {
+                border-color: red;
+            }
+
+            button {
+                padding: 0.75rem 1.5rem;
+                background: #007bff;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            button:hover {
+                background: #0056b3;
+            }
+
+            .reset-button {
+                background: #e91111;
+            }
+
+            .reset-button:hover {
+                background: rgb(224, 35, 35);
+            }
+
+            .hidden {
+                display: none;
+            }
+
+            #age {
+                font-weight: bold;
+                margin-left: 0.5rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="form-container">
+            <div class="slider">
+                <img src="image1.jpg" alt="Image 1">
+                <img src="image2.jpg" alt="Image 2">
+                <img src="image3.jpg" alt="Image 3">
+            </div>
+
+            <form id="registrationForm" novalidate>
+                
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" minlength="3" pattern="[A-Za-z]+" required>
+                    <span class="error hidden">First name must be at least 3 characters and contain only letters.</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" minlength="3" pattern="[A-Za-z]+" required>
+                    <span class="error hidden">Last name must be at least 3 characters and contain only letters.</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="middleName">Middle Name (Optional)</label>
+                    <input type="text" id="middleName" name="middleName" pattern="[A-Za-z]*">
+                </div>
+
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <select id="country" name="country" required>
+                        <option value="">Select Country</option>
+                        <option value="India">India</option>
+                        <option value="USA">USA</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="text" id="phone" name="phone" required>
+                    <span class="error hidden">Enter a valid phone number based on the selected country.</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" minlength="6" required>
+                    <button type="button" onclick="togglePasswordVisibility()">Show</button>
+                    <span class="error hidden">Password must contain at least one letter, one number, and one special character.</span>
+                </div>
+
+                <div class="form-group">
+                    <label>Hobbies (Select at least two)</label>
+                    <div>
+                        <input type="checkbox" id="hobby1" name="hobbies" value="Reading">
+                        <label for="hobby1">Reading</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="hobby2" name="hobbies" value="Writing">
+                        <label for="hobby2">Writing</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="hobby3" name="hobbies" value="Sports">
+                        <label for="hobby3">Sports</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="photo">Passport Photo (Max: 50kb)</label>
+                    <input type="file" id="photo" name="photo" accept="image/*">
+                    <span class="error hidden">Photo size must be less than 50kb.</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" id="dob" name="dob" required>
+                    <span>Age: <span id="age">N/A</span></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <textarea id="address" name="address" rows="4"></textarea>
+                </div>
+
+                <div class="form-group" style="display: flex; justify-content: center; flex-direction: row;align-items: center;">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I agree to the terms & conditions</label>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit">Submit</button><br>
+                    <button type="reset" class="reset-button">Reset</button>
+                </div>
+            </form>
+        </div>
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+            const firstNameInput = document.getElementById('firstName');
+            const lastNameInput = document.getElementById('lastName');
+            const middleNameInput = document.getElementById('middleName');
+            const fullNameInput = document.getElementById('fullName');
+            const countrySelect = document.getElementById('country');
+            const phoneInput = document.getElementById('phone');
+            const passwordInput = document.getElementById('password');
+            const hobbiesCheckboxes = document.querySelectorAll('input[name="hobbies"]');
+            const photoInput = document.getElementById('photo');
+            const dobInput = document.getElementById('dob');
+            const ageSpan = document.getElementById('age');
+            const addressInput = document.getElementById('address');
+            const termsCheckbox = document.getElementById('terms');
+            const form = document.getElementById('registrationForm');
+
+            // Validate First Name and Last Name
+            function validateName(input) {
+                const regex = /^[A-Za-z]{3,}$/;
+                const error = input.nextElementSibling;
+                if (!regex.test(input.value)) {
+                    input.classList.add('error');
+                    error.classList.remove('hidden');
+                    setTimeout(() => error.classList.add('hidden'), 3000);
+                    return false;
+                }
+                input.classList.remove('error');
+                error.classList.add('hidden');
+                return true;
+            }
+
+            firstNameInput.addEventListener('input', () => validateName(firstNameInput));
+            lastNameInput.addEventListener('input', () => validateName(lastNameInput));
+
+            // Validate Middle Name
+            middleNameInput.addEventListener('input', () => {
+                const regex = /^[A-Za-z]*$/;
+                if (!regex.test(middleNameInput.value)) {
+                    middleNameInput.classList.add('error');
+                } else {
+                    middleNameInput.classList.remove('error');
+                }
+            });
+
+            // Update Full Name
+            function updateFullName() {
+                fullNameInput.value = `${firstNameInput.value} ${lastNameInput.value}`.trim();
+            }
+
+            firstNameInput.addEventListener('input', updateFullName);
+            lastNameInput.addEventListener('input', updateFullName);
+
+            // Validate Phone Number
+            countrySelect.addEventListener('change', () => {
+                phoneInput.value = '';
+                phoneInput.placeholder = countrySelect.value === 'India' ? '10-digit phone number' : 'XXX-XXX-XXXX';
+            });
+
+            phoneInput.addEventListener('input', () => {
+                const regex = countrySelect.value === 'India' ? /^\d{10}$/ : /^\d{3}-\d{3}-\d{4}$/;
+                const error = phoneInput.nextElementSibling;
+                if (!regex.test(phoneInput.value)) {
+                    phoneInput.classList.add('error');
+                    error.classList.remove('hidden');
+                    setTimeout(() => error.classList.add('hidden'), 3000);
+                } else {
+                    phoneInput.classList.remove('error');
+                    error.classList.add('hidden');
+                }
+            });
+
+            // Validate Password
+            function togglePasswordVisibility() {
+                passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+            }
+
+            passwordInput.nextElementSibling.addEventListener('click', togglePasswordVisibility);
+
+            passwordInput.addEventListener('input', () => {
+                const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{6,}$/;
+                const error = passwordInput.nextElementSibling.nextElementSibling;
+                if (!regex.test(passwordInput.value)) {
+                    passwordInput.classList.add('error');
+                    error.classList.remove('hidden');
+                    setTimeout(() => error.classList.add('hidden'), 3000);
+                } else {
+                    passwordInput.classList.remove('error');
+                    error.classList.add('hidden');
+                }
+            });
+
+            // Validate Hobbies
+            function validateHobbies() {
+                const selectedHobbies = Array.from(hobbiesCheckboxes).filter(checkbox => checkbox.checked);
+                if (selectedHobbies.length < 2) {
+                    alert('Please select at least two hobbies.');
+                    return false;
+                }
+                return true;
+            }
+
+            // Validate Photo Size
+            photoInput.addEventListener('change', () => {
+                const file = photoInput.files[0];
+                const error = photoInput.nextElementSibling;
+                if (file && file.size > 50 * 1024) {
+                    photoInput.classList.add('error');
+                    error.classList.remove('hidden');
+                    setTimeout(() => error.classList.add('hidden'), 3000);
+                } else {
+                    photoInput.classList.remove('error');
+                    error.classList.add('hidden');
+                }
+            });
+
+            // Calculate Age
+            dobInput.addEventListener('change', () => {
+                const today = new Date();
+                const dob = new Date(dobInput.value);
+                const age = today.getFullYear() - dob.getFullYear();
+                ageSpan.textContent = age >= 0 ? age : 'N/A';
+            });
+
+            // Remove Digits from Address
+            addressInput.addEventListener('input', () => {
+                addressInput.value = addressInput.value.replace(/\d/g, '');
+            });
+
+            // Confirm Reset
+            form.addEventListener('reset', (event) => {
+                if (!confirm('Are you sure you want to reset the form?')) {
+                    event.preventDefault();
+                }
+            });
+
+            // Confirm Before Submit
+            form.addEventListener('submit', (event) => {
+                if (!termsCheckbox.checked) {
+                    alert('You must agree to the terms before submitting.');
+                    event.preventDefault();
+                    return;
+                }
+
+                if (!validateName(firstNameInput) || !validateName(lastNameInput) || !validateHobbies()) {
+                    event.preventDefault();
+                    alert('Please correct the errors in the form.');
+                } else if (!confirm('Are you sure you want to submit the form?')) {
+                    event.preventDefault();
+                }
+            });
+        });
+
+        </script>
+
+    </body>
+</html>

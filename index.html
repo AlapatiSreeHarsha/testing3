@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Form Validation</title>
+        <link rel="stylesheet" href="/home/yasarapu/Documents/ENGINEERING/E2/SEM 2/WT LAB/LAB 4/styles.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    </head>
+
+    <body>
+        <div class="slider-container">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2>Student Registration Form </h2>
+                    <p>Please fill in all required fields marked with *</p>
+                </div>
+
+                <form id="registrationForm" novalidate>
+                    <div class="form-section">
+                        <h3>Personal Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" placeholder="Enter first name" required>
+                                <div class="error" id="firstNameError"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="middleName">Middle Name</label>
+                                <input type="text" id="middleName" name="middleName" placeholder="Enter middle name">
+                                <div class="error" id="middleNameError"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" placeholder="Enter last name" required>
+                                <div class="error" id="lastNameError"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" name="fullName" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Contact Details</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="country">Country *</label>
+                                <select id="country" name="country" required>
+                                    <option value="">Select Country</option>
+                                    <option value="IN">India</option>
+                                    <option value="US">United States</option>
+                                </select>
+                                <div class="error" id="countryError"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" placeholder="Enter phone number" required>
+                                <div class="error" id="phoneError"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" placeholder="Enter email address" required>
+                                <div class="error" id="emailError"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Security</h3>
+                        <div class="form-group">
+                            <label for="password">Password *</label>
+                            <div class="password-container">
+                                <input type="password" id="password" name="password"
+                                    placeholder="Minimum 6 characters with uppercase, lowercase, number & special character"
+                                    required>
+                                <i class="fas fa-eye-slash toggle-password" id="togglePassword"></i>
+                            </div>
+                            <div class="password-strength" id="passwordStrength"></div>
+                            <div class="error" id="passwordError"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Additional Information</h3>
+                        <div class="form-group">
+                            <label for="dob">Date of Birth *</label>
+                            <input type="date" id="dob" name="dob" required>
+                            <span id="age" class="age-display"></span>
+                            <div class="error" id="dobError"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Hobbies (Select at least two) *</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="hobbies" value="reading">
+                                    <span class="checkbox-custom"></span>
+                                    Reading
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="hobbies" value="sports">
+                                    <span class="checkbox-custom"></span>
+                                    Sports
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="hobbies" value="music">
+                                    <span class="checkbox-custom"></span>
+                                    Music
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="hobbies" value="travel">
+                                    <span class="checkbox-custom"></span>
+                                    Travel
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="hobbies" value="cooking">
+                                    <span class="checkbox-custom"></span>
+                                    Cooking
+                                </label>
+                            </div>
+                            <div class="error" id="hobbiesError"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="photo">Passport Photo * <span class="file-hint">(Max size: 50KB)</span></label>
+                            <div class="file-upload">
+                                <input type="file" id="photo" name="photo" accept="image/*" required>
+                                <label for="photo" class="file-label">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <span>Choose a file</span>
+                                </label>
+                            </div>
+                            <div class="error" id="photoError"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address">Address *</label>
+                            <textarea id="address" name="address" placeholder="Enter your address" required></textarea>
+                            <div class="error" id="addressError"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="form-group terms-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="terms" name="terms" required>
+                                <span class="checkbox-custom"></span>
+                                I agree to the terms & conditions *
+                            </label>
+                            <div class="error" id="termsError"></div>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="button" id="resetBtn" class="btn-reset">
+                            Reset
+                        </button>
+                        <button type="submit" class="btn-submit">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+    <script src="/home/yasarapu/Documents/ENGINEERING/E2/SEM 2/WT LAB/LAB 4/script.js"></script>   
+
+</html>
