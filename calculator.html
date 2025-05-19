@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Calculator</title>
+        <style>
+            body{
+                text-align: center; 
+                font-family: Arial, sans-serif; 
+            }
+            .calculator{
+                width: 250px; 
+                margin: auto; 
+                padding: 10px; 
+                border: 2px solid black; 
+            }
+            input{ 
+                width: 100%; 
+                height: 40px; 
+                text-align: right; 
+                font-size: 18px; 
+            }
+            .buttons{ 
+                display: grid; 
+                grid-template-columns: repeat(4, 1fr); 
+                gap: 5px; 
+            }
+            button{ 
+                height: 50px; 
+                font-size: 18px; 
+                cursor: pointer;
+            }
+            .valid{ 
+                background-color: lightgreen; 
+            }
+            .invalid{ 
+                background-color: lightcoral; 
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Calculator</h2>
+
+
+        <div class="calculator" id="calcContainer">
+            <input type="text" id="display">
+            <div class="buttons">
+                
+                <button onclick="appendToDisplay('1')">1</button>
+                <button onclick="appendToDisplay('2')">2</button>
+                <button onclick="appendToDisplay('3')">3</button>
+                <button onclick="appendToDisplay('+')">+</button>
+                <button onclick="appendToDisplay('4')">4</button>
+                <button onclick="appendToDisplay('5')">5</button>
+                <button onclick="appendToDisplay('6')">6</button>
+                <button onclick="appendToDisplay('-')">-</button>
+                <button onclick="appendToDisplay('7')">7</button>
+                <button onclick="appendToDisplay('8')">8</button>
+                <button onclick="appendToDisplay('9')">9</button>
+                <button onclick="appendToDisplay('*')">*</button>
+                <button onclick="appendToDisplay('.')">.</button>
+                <button onclick="appendToDisplay('0')">0</button>
+                <button onclick="calculateResult()">=</button>
+                <button onclick="appendToDisplay('/')">/</button>
+                <button onclick="clearDisplay()">Clear</button>
+                
+            </div>
+        </div>
+        <p id="result"></p>
+
+
+        <script>
+            function appendToDisplay(value){
+                let display = document.getElementById("display");
+                if (/[+\-*\/]$/.test(display.value) && /[+\-*\/]$/.test(value)) return;
+                display.value += value;
+            }
+            function clearDisplay(){
+                document.getElementById("display").value = "";
+                document.getElementById("result").innerText = "";
+                document.getElementById("calcContainer").className = "calculator";
+            }
+            function calculateResult(){
+                let expr = document.getElementById("display").value;
+                try {
+                    if (/^[+\-*\/]|\/$|[+\-*\/]{2,}/.test(expr) || expr.includes("/0")) {
+                        throw "Invalid";
+                    }
+                    let result = eval(expr);
+                    document.getElementById("result").innerText = `${result} (${convertNumberToWords(result)})`;
+                    document.getElementById("calcContainer").className = "calculator valid";
+                } catch {
+                    document.getElementById("result").innerText = "Invalid";
+                    document.getElementById("calcContainer").className = "calculator invalid";
+                }
+            }
+            function convertNumberToWords(num){
+                let words = {
+                    "0": "Zero", "1": "One", "2": "Two", "3": "Three", "4": "Four",
+                    "5": "Five", "6": "Six", "7": "Seven", "8": "Eight", "9": "Nine",
+                    ".": "Point", "-": "Minus"
+                };
+                return num.toString().split("").map(digit => words[digit] || "").join(" ");
+            }
+        </script>
+    </body>
+</html>
